@@ -1,6 +1,11 @@
-import { createMemoryHistory, RootRoute, Route, Router } from '@tanstack/react-router';
+import { RootRoute, Route, Router } from '@tanstack/react-router';
 import { LandingPage } from './pages/LandingPage';
 import { Layout } from './components/Layout';
+import { Pokemon } from './pages/Pokemon';
+
+export interface PokemonSearchParams {
+  name: string;
+}
 
 const rootRoute = new RootRoute({ component: Layout });
 
@@ -10,12 +15,25 @@ const landingPage = new Route({
   component: LandingPage,
 });
 
-const routeTree = rootRoute.addChildren([landingPage]);
-
-const memoryHistory = createMemoryHistory({
-  initialEntries: ['/'], // Pass your initial url
+const pokemonsPage = new Route({
+  getParentRoute: () => rootRoute,
+  path: 'pokemon',
 });
-export const router = new Router({ routeTree, history: memoryHistory });
+
+const pokemonPage = new Route({
+  getParentRoute: () => pokemonsPage,
+  path: '/',
+  component: Pokemon,
+  validateSearch: (search: Record<string, unknown>): PokemonSearchParams => {
+    return {
+      name: search.name ?? '',
+    } as PokemonSearchParams;
+  },
+});
+
+const routeTree = rootRoute.addChildren([landingPage, pokemonsPage.addChildren([pokemonPage])]);
+
+export const router = new Router({ routeTree });
 
 // Register your router for maximum type safety
 declare module '@tanstack/react-router' {
