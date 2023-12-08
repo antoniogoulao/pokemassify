@@ -4,6 +4,7 @@ import { isNilOrEmpty } from '../helpers';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
+import { SearchView } from '../components/SearchView';
 
 export const LandingPage = () => {
   const { ref, inView } = useInView();
@@ -29,6 +30,7 @@ export const LandingPage = () => {
 
   return (
     <>
+      <SearchView />
       {data.pages.map((page) => (
         <Box key={page.next ?? 'last'}>
           {page.results.map((pokemon) => (
