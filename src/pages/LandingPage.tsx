@@ -3,8 +3,8 @@ import { useGetPokemons } from '../hooks/pokemon';
 import { isNilOrEmpty } from '../helpers';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import { Link } from '@tanstack/react-router';
 import { SearchView } from '../components/SearchView';
+import { PokemonCard } from '../components/PokemonCard';
 
 export const LandingPage = () => {
   const { ref, inView } = useInView();
@@ -31,18 +31,18 @@ export const LandingPage = () => {
   return (
     <>
       <SearchView />
-      {data.pages.map((page) => (
-        <Box key={page.next ?? 'last'}>
-          {page.results.map((pokemon) => (
-            <Link key={pokemon.name} to={`/pokemon`} search={{ name: pokemon.name }}>
-              <Typography>{pokemon.name}</Typography>
-            </Link>
-          ))}
-        </Box>
-      ))}
-      <Button ref={ref} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
-        {isFetchingNextPage ? 'Loading more...' : hasNextPage ? 'Load Newer' : 'Nothing more to load'}
-      </Button>
+      <Box width="100%" flex={1} flexWrap="wrap">
+        {data.pages.map((page) => (
+          <Box key={page.next ?? 'last'} display="flex" flexWrap="wrap" justifyContent="center">
+            {page.results.map((pokemon) => (
+              <PokemonCard name={pokemon.name} />
+            ))}
+          </Box>
+        ))}
+        <Button ref={ref} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
+          {isFetchingNextPage ? 'Loading more...' : hasNextPage ? 'Load Newer' : 'Nothing more to load'}
+        </Button>
+      </Box>
     </>
   );
 };

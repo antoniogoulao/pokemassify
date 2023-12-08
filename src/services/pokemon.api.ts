@@ -1,5 +1,6 @@
 import { axiosInstance } from './axios';
 import { PokemonDetailsResponse, PokemonListResponse } from '../types/pokemon';
+import { PokemonTypeListResponse } from '../types/pokemonTypes';
 
 export const getPokemons = async (offset?: number, limit?: number) => {
   const resp = await axiosInstance.get<PokemonListResponse>(`/api/v2/pokemon/?offset=${offset}&limit=${limit}`);
@@ -13,5 +14,10 @@ export const getPokemonByName = async (name: string) => {
 
 export const getPokemonById = async (id: string) => {
   const resp = await axiosInstance.get<PokemonDetailsResponse>(`/api/v2/pokemon/${id}`);
+  return resp.data;
+};
+
+export const getPokemonTypes = async () => {
+  const resp = await axiosInstance.get<PokemonTypeListResponse>('/api/v2/type');
   return resp.data;
 };

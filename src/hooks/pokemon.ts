@@ -21,7 +21,7 @@ export const useGetPokemonList = () =>
   });
 
 export const useGetPokemonByName = (name: string) =>
-  useQuery({ queryKey: ['getPokemonByName'], queryFn: async () => getPokemonByName(name), enabled: !!name });
+  useQuery({ queryKey: ['getPokemonByName', name], queryFn: async () => getPokemonByName(name), enabled: !!name });
 
 export const useGetPokemonById = (id: string) =>
-  useQuery({ queryKey: ['getPokemonById'], queryFn: async () => getPokemonById(id), enabled: !!id });
+  useQuery({ queryKey: ['getPokemonById', id], queryFn: async () => getPokemonById(id), enabled: !!id });

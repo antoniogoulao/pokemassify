@@ -1,4 +1,4 @@
-import { Autocomplete, InputAdornment, ListItem, ListItemText, TextField } from '@mui/material';
+import { Autocomplete, InputAdornment, ListItem, TextField, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Search } from '@mui/icons-material';
 import { SearchContext } from '../store/SearchContext';
@@ -11,7 +11,7 @@ export const SearchBar = () => {
   const [query, setQueryDebounced] = useDebouncedState('', INPUT_DEBOUNCE_TIME);
   const [queryValue, setQueryValue] = useState('');
   const [results, setResults] = useState<PokemonListItemResponse[]>([]);
-  const { isLoading, search } = useContext(SearchContext);
+  const { isLoadingPokemons, search } = useContext(SearchContext);
 
   useEffect(() => {
     setResults(search(query));
@@ -31,7 +31,7 @@ export const SearchBar = () => {
       fullWidth
       openOnFocus
       placeholder="Search"
-      disabled={isLoading}
+      disabled={isLoadingPokemons}
       options={results}
       inputValue={queryValue}
       getOptionLabel={(option) => (option as PokemonListItemResponse).name ?? option}
@@ -42,7 +42,7 @@ export const SearchBar = () => {
         return (
           <ListItem {...props}>
             <Link to={`/pokemon`} search={{ name: option.name }}>
-              <ListItemText>{option.name}</ListItemText>
+              <Typography textTransform="capitalize">{option.name}</Typography>
             </Link>
           </ListItem>
         );

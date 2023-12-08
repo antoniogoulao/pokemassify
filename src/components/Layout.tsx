@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const Layout = () => {
   return (
-    <Box component="main" height={1} tabIndex={-1} id="main-content" overflow="auto">
+    <Box component="main" height={1} tabIndex={-1} id="main-content" overflow="auto" padding={2}>
       <Outlet />
       {isDev && (
         <>
