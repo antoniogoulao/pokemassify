@@ -35,7 +35,7 @@ export const LandingPage = () => {
         {data.pages.map((page) => (
           <Box key={page.next ?? 'last'} display="flex" flexWrap="wrap" justifyContent="center">
             {page.results.map((pokemon) => (
-              <PokemonCard name={pokemon.name} />
+              <PokemonCard key={pokemon.name} name={pokemon.name} />
             ))}
           </Box>
         ))}

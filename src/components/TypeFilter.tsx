@@ -42,7 +42,7 @@ export const TypeFilter = () => {
           </ListItem>
         </MenuItem>
         {types.map((type) => (
-          <MenuItem value={type.name}>
+          <MenuItem key={type.name} value={type.name}>
             <ListItem component="div">
               <ListItemIcon>
                 <img width={32} src={`/images/types/${type.name}_icon.png`} alt={type.name} />

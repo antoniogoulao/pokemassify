@@ -3,6 +3,7 @@ import { useGetPokemonByName } from '../hooks/pokemon';
 import { isNilOrEmpty } from '../helpers';
 import { Link } from '@tanstack/react-router';
 import { colorType } from '../utils/colorType';
+import React from 'react';
 
 export const PokemonCard = ({ name }: { name: string }) => {
   const { data, isFetching } = useGetPokemonByName(name);
@@ -32,7 +33,9 @@ export const PokemonCard = ({ name }: { name: string }) => {
               <Typography component="h2">#{data.id}</Typography>
               <Stack>
                 {data.types.map((type) => (
-                  <img width={32} src={`/images/types/${type.type.name}.png`} alt={type.type.name} />
+                  <React.Fragment key={type.type.name}>
+                    <img width={32} src={`/images/types/${type.type.name}.png`} alt={type.type.name} />
+                  </React.Fragment>
                 ))}
               </Stack>
             </Stack>
