@@ -1,6 +1,6 @@
-import { useGetPokemonByName } from '../hooks/pokemon';
+import { useGetPokemonByName } from '../../hooks/pokemon';
 import { Avatar, Paper, Skeleton } from '@mui/material';
-import { isNilOrEmpty } from '../helpers';
+import { isNilOrEmpty } from '../../helpers';
 import { Link } from '@tanstack/react-router';
 
 export const PokemonAvatar = ({ name, selected = false }: { name: string; selected?: boolean }) => {

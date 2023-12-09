@@ -5,19 +5,18 @@ import { useGetPokemonByName } from '../hooks/pokemon';
 import { isNilOrEmpty } from '../helpers';
 import React from 'react';
 import { colorType } from '../utils/colorType';
-import { useGetPokemonSpeciesByName } from '../hooks/pokemonSpecies';
-import { EvolutionChain } from '../components/EvolutionChain';
+import { EvolutionChain } from '../components/pokemon/EvolutionChain';
+import { PokemonDescription } from '../components/pokemon/PokemonDescription';
 
 export const Pokemon = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
   const { data, isLoading } = useGetPokemonByName(search.name);
-  const { data: pokemonSpecies, isFetching: isFetchingPokemonSpecies } = useGetPokemonSpeciesByName(search.name);
 
-  if (isLoading || isFetchingPokemonSpecies) {
+  if (isLoading) {
     return <Skeleton width={100} height={500} />;
   }
 
-  if (isNilOrEmpty(data) || isNilOrEmpty(pokemonSpecies)) {
+  if (isNilOrEmpty(data)) {
     return null;
   }
 
@@ -26,6 +25,7 @@ export const Pokemon = () => {
       direction={{ xs: 'column', sm: 'row' }}
       gap={2.5}
       sx={{
+        mt: 2,
         padding: 2,
         minHeight: { xs: 0, lg: 'calc(100vh - 320px)' },
         backgroundColor: colorType(data.types[0].type.name),
@@ -43,8 +43,10 @@ export const Pokemon = () => {
         flexWrap="wrap"
       >
         <Stack spacing={3} alignItems="center" flexWrap="wrap">
-          <Typography component="h1">#{data.id}</Typography>
-          <Typography component="h1" textTransform="capitalize">
+          <Typography component="h1" variant="h4">
+            #{data.id}
+          </Typography>
+          <Typography component="h1" variant="h4" textTransform="capitalize">
             {data.name}
           </Typography>
         </Stack>
@@ -70,49 +72,42 @@ export const Pokemon = () => {
         </Stack>
         <Stack direction="row" spacing={2}>
           <Stack alignItems="center" flexWrap="wrap">
-            <Typography>Height</Typography>
+            <Typography variant="h6">Height</Typography>
             <Typography>{(data.height / 10).toFixed(1)}m</Typography>
           </Stack>
           <Stack alignItems="center" flexWrap="wrap">
-            <Typography>Weight</Typography>
+            <Typography variant="h6">Weight</Typography>
             <Typography>{(data.weight / 10).toFixed(1)}Kg</Typography>
           </Stack>
         </Stack>
       </Stack>
       <Stack spacing={2}>
-        {pokemonSpecies.flavor_text_entries[0] && (
-          <Stack spacing={1}>
-            <Typography component="h2">About</Typography>
-            <Typography>{pokemonSpecies.flavor_text_entries[0].flavor_text}</Typography>
-          </Stack>
-        )}
-        <Typography component="h2">Abilities</Typography>
-        <Stack direction="row" spacing={3}>
+        <PokemonDescription />
+        <Typography component="h2" variant="h5">
+          Abilities
+        </Typography>
+        <Stack direction="row" gap={3} sx={{ justifyContent: { xs: 'center', sm: 'start' } }} flexWrap="wrap">
           {data.abilities.map((ability) => (
             <Typography key={ability.ability.name} textTransform="capitalize">
               {ability.ability.name}
             </Typography>
           ))}
         </Stack>
-        <Typography component="h2">Base Stats</Typography>
-        <Stack direction="row" gap={3} flexWrap="wrap">
+        <Typography component="h2" variant="h5">
+          Base Stats
+        </Typography>
+        <Stack direction="row" gap={3} flexWrap="wrap" sx={{ justifyContent: { xs: 'center', sm: 'start' } }}>
           {data.stats.map((stat) => (
             <Stack key={stat.stat.name} alignItems="center">
-              <Typography textTransform="capitalize">{stat.stat.name}</Typography>
+              <Typography textTransform="capitalize" variant="h6">
+                {stat.stat.name}
+              </Typography>
               <Typography>{stat.base_stat}</Typography>
             </Stack>
           ))}
         </Stack>
-        <Typography component="h2">Evolution</Typography>
-        <EvolutionChain
-          evolutionChainId={
-            pokemonSpecies.evolution_chain.url
-              .split('/')
-              .filter((n) => n)
-              .slice(-1)[0]
-          }
-          name={search.name}
-        />
+
+        <EvolutionChain />
       </Stack>
     </Stack>
   );

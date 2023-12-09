@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import { SearchContext } from '../store/SearchContext';
+import { SearchContext } from '../../store/SearchContext';
 
 export const TypeFilter = () => {
   const [type, setType] = useState('');
@@ -21,7 +21,7 @@ export const TypeFilter = () => {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl sx={{ mt: 1, minWidth: 120 }} size="small">
       <InputLabel id="demo-select-small-label">Type</InputLabel>
       <Select
         labelId="demo-select-small-label"
@@ -30,6 +30,7 @@ export const TypeFilter = () => {
         label="Type"
         onChange={handleChange}
         disabled={isLoadingTypes}
+        sx={{ backgroundColor: 'white' }}
       >
         <MenuItem value="">
           <ListItem>

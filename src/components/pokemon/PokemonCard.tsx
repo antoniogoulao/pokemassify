@@ -1,8 +1,8 @@
 import { Box, Card, CardActionArea, CardContent, CardMedia, Skeleton, Stack, Typography } from '@mui/material';
-import { useGetPokemonByName } from '../hooks/pokemon';
-import { isNilOrEmpty } from '../helpers';
+import { useGetPokemonByName } from '../../hooks/pokemon';
+import { isNilOrEmpty } from '../../helpers';
 import { Link } from '@tanstack/react-router';
-import { colorType } from '../utils/colorType';
+import { colorType } from '../../utils/colorType';
 import React from 'react';
 
 export const PokemonCard = ({ name }: { name: string }) => {

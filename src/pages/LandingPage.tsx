@@ -3,8 +3,8 @@ import { useGetPokemons } from '../hooks/pokemon';
 import { isNilOrEmpty } from '../helpers';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import { SearchView } from '../components/SearchView';
-import { PokemonCard } from '../components/PokemonCard';
+import { PokemonCard } from '../components/pokemon/PokemonCard';
+import { NavBar } from '../components/NavBar';
 
 export const LandingPage = () => {
   const { ref, inView } = useInView();
@@ -30,7 +30,7 @@ export const LandingPage = () => {
 
   return (
     <>
-      <SearchView />
+      <NavBar />
       <Box width="100%" flex={1} flexWrap="wrap">
         {data.pages.map((page) => (
           <Box key={page.next ?? 'last'} display="flex" flexWrap="wrap" justifyContent="center">

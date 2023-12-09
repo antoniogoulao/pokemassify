@@ -1,11 +1,20 @@
-import { Autocomplete, InputAdornment, ListItem, TextField, Typography } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
-import { Search } from '@mui/icons-material';
-import { SearchContext } from '../store/SearchContext';
-import { PokemonListItemResponse } from '../types/pokemon';
+import {
+  Autocomplete,
+  InputAdornment,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+import { ArrowForwardIos, Search } from '@mui/icons-material';
+import { SearchContext } from '../../store/SearchContext';
+import { PokemonListItemResponse } from '../../types/pokemon';
 import { useDebouncedState } from '@react-hookz/web';
-import { INPUT_DEBOUNCE_TIME } from '../constants';
+import { INPUT_DEBOUNCE_TIME } from '../../constants';
 import { Link } from '@tanstack/react-router';
+import { PokemonSprite } from './PokemonSprite';
 
 export const SearchBar = () => {
   const [query, setQueryDebounced] = useDebouncedState('', INPUT_DEBOUNCE_TIME);
@@ -40,11 +49,16 @@ export const SearchBar = () => {
       }}
       renderOption={(props, option) => {
         return (
-          <ListItem {...props}>
-            <Link to={`/pokemon`} search={{ name: option.name }}>
-              <Typography textTransform="capitalize">{option.name}</Typography>
-            </Link>
-          </ListItem>
+          <Link to={`/pokemon`} search={{ name: option.name }}>
+            <ListItem {...props} secondaryAction={<ArrowForwardIos />}>
+              <ListItemIcon>
+                <PokemonSprite name={option.name} />
+              </ListItemIcon>
+              <ListItemText>
+                <Typography textTransform="capitalize">{option.name}</Typography>
+              </ListItemText>
+            </ListItem>
+          </Link>
         );
       }}
       onInputChange={(_, newValue) => handleChange(newValue)}
@@ -52,6 +66,7 @@ export const SearchBar = () => {
         <TextField
           {...params}
           value={queryValue}
+          placeholder="Search"
           InputProps={{
             ...params.InputProps,
             startAdornment: (
@@ -62,6 +77,7 @@ export const SearchBar = () => {
           }}
         />
       )}
+      sx={{ background: 'white', border: 'none' }}
     />
   );
 };

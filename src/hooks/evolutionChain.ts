@@ -10,6 +10,7 @@ export const useGetEvolutionChainById = (id: string) =>
       const resp = await getEvolutionChainById(id);
       return { ...resp, evolutions: flatten(resp.chain) };
     },
+    enabled: !!id,
   });
 
 const flatten = (chain: EvolutionChain) => {
