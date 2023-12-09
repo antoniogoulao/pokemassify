@@ -1,4 +1,4 @@
-import { Avatar, Paper, Skeleton, Stack, Typography } from '@mui/material';
+import { Avatar, Paper, Skeleton, Stack, Tooltip, Typography } from '@mui/material';
 import { useSearch } from '@tanstack/react-router';
 import { PokemonSearchParams } from '../routes';
 import { useGetPokemonByName } from '../hooks/pokemon';
@@ -7,6 +7,8 @@ import React from 'react';
 import { colorType } from '../utils/colorType';
 import { EvolutionChain } from '../components/pokemon/EvolutionChain';
 import { PokemonDescription } from '../components/pokemon/PokemonDescription';
+import { BaseStats } from '../components/pokemon/BaseStats';
+import { Abilities } from '../components/pokemon/Abilities';
 
 export const Pokemon = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
@@ -35,7 +37,7 @@ export const Pokemon = () => {
         sx={{
           width: {
             xs: '100%',
-            sm: '20%',
+            sm: '33%',
           },
         }}
         spacing={2}
@@ -50,24 +52,33 @@ export const Pokemon = () => {
             {data.name}
           </Typography>
         </Stack>
-        <img
-          width={180}
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}
-          alt={data.name}
-        />
+        <>
+          <img
+            width={180}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}
+            alt={data.name}
+          />
+          <img
+            width={48}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${data.id}.gif`}
+            alt={data.name}
+          />
+        </>
         <Stack direction="row" justifyContent="center" spacing={1}>
           {data.types.map((type) => (
-            <Avatar
-              key={type.type.name}
-              component={Paper}
-              elevation={3}
-              src={`/images/types/${type.type.name}_icon.png`}
-              alt={type.type.name}
-              sx={{
-                width: 30,
-                height: 30,
-              }}
-            />
+            <Tooltip title={type.type.name}>
+              <Avatar
+                key={type.type.name}
+                component={Paper}
+                elevation={3}
+                src={`/images/types/${type.type.name}_icon.png`}
+                alt={type.type.name}
+                sx={{
+                  width: 30,
+                  height: 30,
+                }}
+              />
+            </Tooltip>
           ))}
         </Stack>
         <Stack direction="row" spacing={2}>
@@ -83,30 +94,8 @@ export const Pokemon = () => {
       </Stack>
       <Stack spacing={2}>
         <PokemonDescription />
-        <Typography component="h2" variant="h5">
-          Abilities
-        </Typography>
-        <Stack direction="row" gap={3} sx={{ justifyContent: { xs: 'center', sm: 'start' } }} flexWrap="wrap">
-          {data.abilities.map((ability) => (
-            <Typography key={ability.ability.name} textTransform="capitalize">
-              {ability.ability.name}
-            </Typography>
-          ))}
-        </Stack>
-        <Typography component="h2" variant="h5">
-          Base Stats
-        </Typography>
-        <Stack direction="row" gap={3} flexWrap="wrap" sx={{ justifyContent: { xs: 'center', sm: 'start' } }}>
-          {data.stats.map((stat) => (
-            <Stack key={stat.stat.name} alignItems="center">
-              <Typography textTransform="capitalize" variant="h6">
-                {stat.stat.name}
-              </Typography>
-              <Typography>{stat.base_stat}</Typography>
-            </Stack>
-          ))}
-        </Stack>
-
+        <Abilities />
+        <BaseStats />
         <EvolutionChain />
       </Stack>
     </Stack>

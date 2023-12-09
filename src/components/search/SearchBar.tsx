@@ -13,7 +13,7 @@ import { SearchContext } from '../../store/SearchContext';
 import { PokemonListItemResponse } from '../../types/pokemon';
 import { useDebouncedState } from '@react-hookz/web';
 import { INPUT_DEBOUNCE_TIME } from '../../constants';
-import { Link } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { PokemonSprite } from './PokemonSprite';
 
 export const SearchBar = () => {
@@ -21,6 +21,7 @@ export const SearchBar = () => {
   const [queryValue, setQueryValue] = useState('');
   const [results, setResults] = useState<PokemonListItemResponse[]>([]);
   const { isLoadingPokemons, search } = useContext(SearchContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setResults(search(query));
@@ -49,16 +50,18 @@ export const SearchBar = () => {
       }}
       renderOption={(props, option) => {
         return (
-          <Link to={`/pokemon`} search={{ name: option.name }}>
-            <ListItem {...props} secondaryAction={<ArrowForwardIos />}>
-              <ListItemIcon>
-                <PokemonSprite name={option.name} />
-              </ListItemIcon>
-              <ListItemText>
-                <Typography textTransform="capitalize">{option.name}</Typography>
-              </ListItemText>
-            </ListItem>
-          </Link>
+          <ListItem
+            {...props}
+            secondaryAction={<ArrowForwardIos />}
+            onClick={() => navigate({ to: '/pokemon', search: { name: option.name } })}
+          >
+            <ListItemIcon>
+              <PokemonSprite name={option.name} />
+            </ListItemIcon>
+            <ListItemText>
+              <Typography textTransform="capitalize">{option.name}</Typography>
+            </ListItemText>
+          </ListItem>
         );
       }}
       onInputChange={(_, newValue) => handleChange(newValue)}

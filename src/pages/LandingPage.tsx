@@ -5,10 +5,14 @@ import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import { PokemonCard } from '../components/pokemon/PokemonCard';
 import { NavBar } from '../components/NavBar';
+import { AppErrorBoundary } from '../components/AppErrorBoundary';
+import { ErrorBoundary } from '../shared/components/src/ErrorBoundary/ErrorBoundary';
+import { useIntl } from 'react-intl';
 
 export const LandingPage = () => {
   const { ref, inView } = useInView();
   const { data, status, isError, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetPokemons();
+  const intl = useIntl();
 
   useEffect(() => {
     if (inView) {
@@ -17,7 +21,7 @@ export const LandingPage = () => {
   }, [fetchNextPage, inView]);
 
   if (isError) {
-    return <Typography>Error</Typography>;
+    return <Typography>{intl.formatMessage({ defaultMessage: 'Error' })}</Typography>;
   }
 
   if (status === 'pending') {
@@ -25,11 +29,10 @@ export const LandingPage = () => {
   }
 
   if (isNilOrEmpty(data)) {
-    return <Typography>We couldn't load any data</Typography>;
+    return <Typography>{intl.formatMessage({ defaultMessage: 'We could not load any data' })}</Typography>;
   }
-
   return (
-    <>
+    <ErrorBoundary fallback={<AppErrorBoundary />}>
       <NavBar />
       <Box width="100%" flex={1} flexWrap="wrap">
         {data.pages.map((page) => (
@@ -40,9 +43,13 @@ export const LandingPage = () => {
           </Box>
         ))}
         <Button ref={ref} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
-          {isFetchingNextPage ? 'Loading more...' : hasNextPage ? 'Load Newer' : 'Nothing more to load'}
+          {isFetchingNextPage
+            ? intl.formatMessage({ defaultMessage: 'Loading more...' })
+            : hasNextPage
+              ? intl.formatMessage({ defaultMessage: 'Load Newer' })
+              : intl.formatMessage({ defaultMessage: 'Nothing more to load' })}
         </Button>
       </Box>
-    </>
+    </ErrorBoundary>
   );
 };

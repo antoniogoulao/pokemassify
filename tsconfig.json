@@ -7,7 +7,10 @@
     "lib": ["es2022", "dom"],
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "types": ["cypress", "@testing-library/cypress"]
   },
   "exclude": ["node_modules"]
 }
