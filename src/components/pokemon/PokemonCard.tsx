@@ -17,7 +17,6 @@ export const PokemonCard = ({ name }: { name: string }) => {
     return null;
   }
 
-  //throw new Error('oh oh Error');
   return (
     <Card
       raised
