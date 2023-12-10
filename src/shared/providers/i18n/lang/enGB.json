@@ -1,9 +1,19 @@
 {
-  "KN7zKn": "Error",
-  "b8XtVC": "Load Newer",
-  "bgGdBf": "Unable to load Pokémassify",
-  "hiFVrN": "Nothing more to load",
-  "iuY8kx": "Something went wrong.",
-  "tL4WC1": "Loading more...",
-  "xjajDz": "We could not load any data"
+  "action.loadMore": "Load Newer",
+  "error.app": "Unable to load Pokémassify",
+  "error.emptyData": "We could not load any data",
+  "error.exception": "Something went wrong",
+  "error.generic": "Error",
+  "info.noEvolution": "This Pokémon does not evolve.",
+  "info.nothingToLoad": "Nothing more to load",
+  "label.abilities": "Abilities",
+  "label.about": "About",
+  "label.baseStats": "Base Stats",
+  "label.evolution": "Evolution",
+  "label.height": "Height",
+  "label.none": "None",
+  "label.search": "Search",
+  "label.type": "Type",
+  "label.weight": "Weight",
+  "load.more": "Loading more..."
 }

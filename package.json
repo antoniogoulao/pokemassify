@@ -9,7 +9,7 @@
     "eject": "react-scripts eject",
     "extract": "formatjs extract",
     "compile": "formatjs compile",
-    "extract-compile": "formatjs extract 'src/**/*.ts*' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/shared/providers/i18n/lang/enGB.json && rm temp.json"
+    "extract-compile": "formatjs extract 'src/**/*.ts*' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' --extract-source-location --remove-default-message && formatjs compile 'temp.json' --out-file src/shared/providers/i18n/lang/enGB.json && rm temp.json"
   },
   "eslintConfig": {
     "extends": [

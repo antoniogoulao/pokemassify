@@ -9,6 +9,7 @@ import { EvolutionChain } from '../components/pokemon/EvolutionChain';
 import { PokemonDescription } from '../components/pokemon/PokemonDescription';
 import { BaseStats } from '../components/pokemon/BaseStats';
 import { Abilities } from '../components/pokemon/Abilities';
+import { FormattedMessage } from 'react-intl';
 
 export const Pokemon = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
@@ -66,9 +67,8 @@ export const Pokemon = () => {
         </>
         <Stack direction="row" justifyContent="center" spacing={1}>
           {data.types.map((type) => (
-            <Tooltip title={type.type.name}>
+            <Tooltip key={type.type.name} title={type.type.name}>
               <Avatar
-                key={type.type.name}
                 component={Paper}
                 elevation={3}
                 src={`/images/types/${type.type.name}_icon.png`}
@@ -83,11 +83,15 @@ export const Pokemon = () => {
         </Stack>
         <Stack direction="row" spacing={2}>
           <Stack alignItems="center" flexWrap="wrap">
-            <Typography variant="h6">Height</Typography>
+            <Typography variant="h6">
+              <FormattedMessage id="label.height" defaultMessage="Height" />
+            </Typography>
             <Typography>{(data.height / 10).toFixed(1)}m</Typography>
           </Stack>
           <Stack alignItems="center" flexWrap="wrap">
-            <Typography variant="h6">Weight</Typography>
+            <Typography variant="h6">
+              <FormattedMessage id="label.weight" defaultMessage="Weight" />
+            </Typography>
             <Typography>{(data.weight / 10).toFixed(1)}Kg</Typography>
           </Stack>
         </Stack>

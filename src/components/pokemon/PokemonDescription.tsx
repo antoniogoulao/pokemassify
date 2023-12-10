@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { isNilOrEmpty } from '../../helpers';
 import { useSearch } from '@tanstack/react-router';
 import { PokemonSearchParams } from '../../routes';
+import { FormattedMessage } from 'react-intl';
 
 export const PokemonDescription = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
@@ -30,7 +31,7 @@ export const PokemonDescription = () => {
       {!isNilOrEmpty(description) && (
         <Stack spacing={1}>
           <Typography component="h2" variant="h5">
-            About
+            <FormattedMessage id="label.about" defaultMessage="About" />
           </Typography>
           <Typography>{description}</Typography>
         </Stack>

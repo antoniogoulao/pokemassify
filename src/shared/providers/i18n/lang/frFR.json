@@ -1,0 +1,19 @@
+{
+  "action.loadMore": "Charger plus",
+  "error.app": "Impossible de charger Pokémassify.",
+  "error.emptyData": "L'application n'a pas pu se charger",
+  "error.exception": "Quelque chose s'est mal passé.",
+  "error.generic": "Erreur",
+  "info.nothingToLoad": "Rien d'autre à charger",
+  "info.noEvolution": "Ce Pokémon n'a aucune évolution.",
+  "label.abilities": "Capacités",
+  "label.about": "À propos",
+  "label.baseStats": "Statistiques de base",
+  "label.evolution": "Évolution",
+  "label.height": "Hauteur",
+  "label.none": "Aucun",
+  "label.search": "Rechercher",
+  "label.type": "Type",
+  "label.weight": "Poids",
+  "load.more": "Chargement en cours..."
+}

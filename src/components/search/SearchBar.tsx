@@ -15,6 +15,7 @@ import { useDebouncedState } from '@react-hookz/web';
 import { INPUT_DEBOUNCE_TIME } from '../../constants';
 import { useNavigate } from '@tanstack/react-router';
 import { PokemonSprite } from './PokemonSprite';
+import { useIntl } from 'react-intl';
 
 export const SearchBar = () => {
   const [query, setQueryDebounced] = useDebouncedState('', INPUT_DEBOUNCE_TIME);
@@ -22,6 +23,7 @@ export const SearchBar = () => {
   const [results, setResults] = useState<PokemonListItemResponse[]>([]);
   const { isLoadingPokemons, search } = useContext(SearchContext);
   const navigate = useNavigate();
+  const intl = useIntl();
 
   useEffect(() => {
     setResults(search(query));
@@ -40,7 +42,6 @@ export const SearchBar = () => {
       freeSolo
       fullWidth
       openOnFocus
-      placeholder="Search"
       disabled={isLoadingPokemons}
       options={results}
       inputValue={queryValue}
@@ -69,7 +70,7 @@ export const SearchBar = () => {
         <TextField
           {...params}
           value={queryValue}
-          placeholder="Search"
+          placeholder={intl.formatMessage({ id: 'label.search', defaultMessage: 'Search' })}
           InputProps={{
             ...params.InputProps,
             startAdornment: (

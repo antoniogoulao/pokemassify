@@ -4,6 +4,7 @@ import { useSearch } from '@tanstack/react-router';
 import { PokemonSearchParams } from '../../routes';
 import { useGetPokemonByName } from '../../hooks/pokemon';
 import { isNilOrEmpty } from '../../helpers';
+import { FormattedMessage } from 'react-intl';
 
 export const Abilities = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
@@ -16,7 +17,7 @@ export const Abilities = () => {
   return (
     <>
       <Typography component="h2" variant="h5">
-        Abilities
+        <FormattedMessage id="label.abilities" defaultMessage="Abilities" />
       </Typography>
       <Stack direction="row" gap={3} sx={{ justifyContent: { xs: 'center', sm: 'start' } }} flexWrap="wrap">
         {data.abilities.map((ability) => (

@@ -1,4 +1,19 @@
 {
-  "bgGdBf": "Impossível carregar Pokémassify.",
-  "iuY8kx": "Algo correu mal."
+  "action.loadMore": "Carregar mais",
+  "error.app": "Impossível carregar Pokémassify.",
+  "error.emptyData": "A aplicação não conseguiu carregar",
+  "error.exception": "Algo correu mal.",
+  "error.generic": "Erro",
+  "info.nothingToLoad": "Nada mais para carregar",
+  "info.noEvolution": "Este Pokémon não tem evoluções.",
+  "label.abilities": "Aptidões",
+  "label.about": "Sobre",
+  "label.baseStats": "Estatísticas Base",
+  "label.evolution": "Evolução",
+  "label.height": "Altura",
+  "label.none": "Nenhum",
+  "label.search": "Pesquisa",
+  "label.type": "Tipo",
+  "label.weight": "Peso",
+  "load.more": "A carregar..."
 }

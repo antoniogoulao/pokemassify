@@ -7,6 +7,7 @@ import { useSearch } from '@tanstack/react-router';
 import { PokemonSearchParams } from '../../routes';
 import { useGetPokemonSpeciesByName } from '../../hooks/pokemonSpecies';
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 export const EvolutionChain = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
@@ -29,10 +30,14 @@ export const EvolutionChain = () => {
   return (
     <>
       <Typography component="h2" variant="h5">
-        Evolution
+        <FormattedMessage id="label.evolution" defaultMessage="Evolution" />
       </Typography>
       <Stack gap={3}>
-        {data.evolutions.length === 1 && <Typography>This Pokémon does not evolve.</Typography>}
+        {data.evolutions.length === 1 && (
+          <Typography>
+            <FormattedMessage id="info.noEvolution" defaultMessage="This Pokémon does not evolve." />
+          </Typography>
+        )}
         <Stack
           direction="row"
           divider={<ArrowForwardIos sx={{ color: 'white', height: 30 }} />}

@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { SearchContext } from '../../store/SearchContext';
+import { FormattedMessage } from 'react-intl';
 
 export const TypeFilter = () => {
   const [type, setType] = useState('');
@@ -22,7 +23,9 @@ export const TypeFilter = () => {
 
   return (
     <FormControl sx={{ mt: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small-label">Type</InputLabel>
+      <InputLabel id="demo-select-small-label">
+        <FormattedMessage id="label.type" defaultMessage="Type" />
+      </InputLabel>
       <Select
         labelId="demo-select-small-label"
         id="demo-select-small"
@@ -38,7 +41,9 @@ export const TypeFilter = () => {
               <img width={32} src={`/images/types/none_icon.png`} alt={'none'} />
             </ListItemIcon>
             <ListItemText sx={{ ml: 2 }}>
-              <Typography textTransform="capitalize">None</Typography>
+              <Typography textTransform="capitalize">
+                <FormattedMessage id="label.none" defaultMessage="None" />
+              </Typography>
             </ListItemText>
           </ListItem>
         </MenuItem>

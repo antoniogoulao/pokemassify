@@ -7,12 +7,11 @@ import { PokemonCard } from '../components/pokemon/PokemonCard';
 import { NavBar } from '../components/NavBar';
 import { AppErrorBoundary } from '../components/AppErrorBoundary';
 import { ErrorBoundary } from '../shared/components/src/ErrorBoundary/ErrorBoundary';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 export const LandingPage = () => {
   const { ref, inView } = useInView();
   const { data, status, isError, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetPokemons();
-  const intl = useIntl();
 
   useEffect(() => {
     if (inView) {
@@ -21,7 +20,11 @@ export const LandingPage = () => {
   }, [fetchNextPage, inView]);
 
   if (isError) {
-    return <Typography>{intl.formatMessage({ defaultMessage: 'Error' })}</Typography>;
+    return (
+      <Typography>
+        <FormattedMessage id="error.generic" defaultMessage="Error" />
+      </Typography>
+    );
   }
 
   if (status === 'pending') {
@@ -29,7 +32,11 @@ export const LandingPage = () => {
   }
 
   if (isNilOrEmpty(data)) {
-    return <Typography>{intl.formatMessage({ defaultMessage: 'We could not load any data' })}</Typography>;
+    return (
+      <Typography>
+        <FormattedMessage id="error.emptyData" defaultMessage="We could not load any data" />
+      </Typography>
+    );
   }
   return (
     <ErrorBoundary fallback={<AppErrorBoundary />}>
@@ -43,11 +50,13 @@ export const LandingPage = () => {
           </Box>
         ))}
         <Button ref={ref} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
-          {isFetchingNextPage
-            ? intl.formatMessage({ defaultMessage: 'Loading more...' })
-            : hasNextPage
-              ? intl.formatMessage({ defaultMessage: 'Load Newer' })
-              : intl.formatMessage({ defaultMessage: 'Nothing more to load' })}
+          {isFetchingNextPage ? (
+            <FormattedMessage id="load.more" defaultMessage="Loading more..." />
+          ) : hasNextPage ? (
+            <FormattedMessage id="action.loadMore" defaultMessage="Load Newer" />
+          ) : (
+            <FormattedMessage id="info.nothingToLoad" defaultMessage="Nothing more to load" />
+          )}
         </Button>
       </Box>
     </ErrorBoundary>

@@ -3,7 +3,7 @@ import { Component } from 'react';
 
 import type { BoxProps } from '@mui/material';
 import { Stack, Typography } from '@mui/material';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { FmdBad } from '@mui/icons-material';
 import { isTest } from '../../../../helpers';
 
@@ -21,12 +21,12 @@ interface State {
 }
 
 export const DefaultErrorFallback = ({ ref, ...props }: BoxProps) => {
-  const intl = useIntl();
-
   return (
     <Stack direction="row" alignItems="center" justifyContent="center" flexGrow={1} {...props}>
       <FmdBad color="error" />
-      <Typography>{intl.formatMessage({ defaultMessage: 'Something went wrong.' })}</Typography>
+      <Typography>
+        <FormattedMessage id="error.exception" defaultMessage="Something went wrong" />
+      </Typography>
     </Stack>
   );
 };
