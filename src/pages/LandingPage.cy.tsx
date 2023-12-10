@@ -1,14 +1,17 @@
 import { LandingPage } from './LandingPage';
-import * as reactRouter from '@tanstack/react-router';
 import { pokemonDetail, pokemonList } from '../__mocks__/pokemons.mocks';
 import { types } from '../__mocks__/types.mocks';
+
+import * as reactRouter from '@tanstack/react-router';
 
 describe('Landing page', () => {
   beforeEach(() => {
     cy.intercept('https://pokeapi.co/api/v2/type', types);
     cy.intercept('https://pokeapi.co/api/v2/pokemon/*', pokemonDetail);
     cy.intercept('https://pokeapi.co/api/v2/pokemon/?offset=*', pokemonList);
-    cy.stub(reactRouter, 'useNavigate').callsFake(() => cy.stub().as('navigate'));
+    cy.stub(reactRouter, 'useNavigate')
+      .as('navigate')
+      .callsFake(() => cy.stub());
   });
 
   it('should render', () => {

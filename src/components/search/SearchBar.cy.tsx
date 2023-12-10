@@ -10,7 +10,9 @@ describe('Search Bar', () => {
     cy.intercept('https://pokeapi.co/api/v2/pokemon/*', pokemonList);
     cy.intercept('https://pokeapi.co/api/v2/type', types);
     cy.intercept('/PokeAPI/**', '/public/images/pokemon.png');
-    cy.stub(reactRouter, 'useNavigate').callsFake(() => cy.stub().as('navigate'));
+    cy.stub(reactRouter, 'useNavigate')
+      .as('navigate')
+      .callsFake(() => cy.stub());
   });
 
   it('should render', () => {

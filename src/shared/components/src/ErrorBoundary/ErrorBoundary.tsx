@@ -25,7 +25,7 @@ export const DefaultErrorFallback = ({ ref, ...props }: BoxProps) => {
     <Stack direction="row" alignItems="center" justifyContent="center" flexGrow={1} {...props}>
       <FmdBad color="error" />
       <Typography>
-        <FormattedMessage id="error.exception" defaultMessage="Something went wrong" />
+        <FormattedMessage id="error.exception" defaultMessage="Something went wrong." />
       </Typography>
     </Stack>
   );

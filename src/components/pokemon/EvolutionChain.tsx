@@ -45,6 +45,7 @@ export const EvolutionChain = () => {
           alignItems="center"
           sx={{ ml: 2 }}
           flexWrap="wrap"
+          data-testid="pokemon-detail-evolution-chain"
         >
           {data.evolutions.map((evolution) => (
             <PokemonAvatar key={evolution.name} name={evolution.name} selected={evolution.name === search.name} />

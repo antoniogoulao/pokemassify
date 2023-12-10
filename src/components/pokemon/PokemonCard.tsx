@@ -28,7 +28,12 @@ export const PokemonCard = ({ name }: { name: string }) => {
         maxWidth: 220,
       }}
     >
-      <CardActionArea onClick={() => navigate({ to: '/pokemon', search: { name } })}>
+      <CardActionArea
+        onClick={() => {
+          console.log('called');
+          navigate({ to: '/pokemon', search: { name } });
+        }}
+      >
         <CardContent>
           <Stack direction="row" justifyContent="space-between">
             <Typography component="h2">#{data.id}</Typography>

@@ -19,4 +19,5 @@ const colours: Record<string, string> = {
   fairy: '#D685AD',
 };
 
-export const colorType = (type: string) => colours[type] ?? '#aaa';
+export const colorType = (type: string, addAlpha?: boolean) =>
+  addAlpha ? `${colours[type]}AA` : colours[type] ?? '#aaa';

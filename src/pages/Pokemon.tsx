@@ -10,6 +10,7 @@ import { PokemonDescription } from '../components/pokemon/PokemonDescription';
 import { BaseStats } from '../components/pokemon/BaseStats';
 import { Abilities } from '../components/pokemon/Abilities';
 import { FormattedMessage } from 'react-intl';
+import { PokemonDetails } from '../components/pokemon/PokemonDetails';
 
 export const Pokemon = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
@@ -31,7 +32,7 @@ export const Pokemon = () => {
         mt: 2,
         padding: 2,
         minHeight: { xs: 0, lg: 'calc(100vh - 320px)' },
-        backgroundColor: colorType(data.types[0].type.name),
+        backgroundColor: colorType(data.types[0].type.name, true),
       }}
     >
       <Stack
@@ -62,7 +63,7 @@ export const Pokemon = () => {
           <img
             width={48}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${data.id}.gif`}
-            alt={data.name}
+            alt={`${data.name} gif`}
           />
         </>
         <Stack direction="row" justifyContent="center" spacing={1}>
@@ -98,6 +99,7 @@ export const Pokemon = () => {
       </Stack>
       <Stack spacing={2}>
         <PokemonDescription />
+        <PokemonDetails />
         <Abilities />
         <BaseStats />
         <EvolutionChain />

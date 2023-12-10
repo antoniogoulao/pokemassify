@@ -17,7 +17,7 @@ export const AppErrorBoundary = () => {
         </Typography>
         <Typography component="h2" variant="h6">
           <FormattedMessage
-            id="error.appDescription"
+            id="error.appAction"
             defaultMessage="Please verify your internet connection and try connecting again. If the issue keeps happening, grab your Game Boy."
           />
         </Typography>
