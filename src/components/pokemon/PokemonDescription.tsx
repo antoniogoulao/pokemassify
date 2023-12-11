@@ -3,8 +3,8 @@ import { Skeleton, Stack, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { isNilOrEmpty } from '../../helpers';
 import { useSearch } from '@tanstack/react-router';
-import { PokemonSearchParams } from '../../routes';
 import { FormattedMessage } from 'react-intl';
+import { PokemonSearchParams } from '../../types/router';
 
 export const PokemonDescription = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;

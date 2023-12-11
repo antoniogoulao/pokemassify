@@ -17,9 +17,9 @@ describe('Landing page', () => {
   it('should render', () => {
     cy.mount(<LandingPage />);
 
-    //cy.findByPlaceholderText('Search').should('exist');
+    cy.findByPlaceholderText('Search').should('exist');
     cy.findByLabelText('Type').should('exist');
-    cy.findAllByText('bulbasaur').should('have.length', 48);
+    cy.findAllByText('bulbasaur').should('have.length', 24);
   });
 
   it('should navigate to pokemon page', () => {

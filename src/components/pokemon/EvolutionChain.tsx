@@ -4,10 +4,10 @@ import { ArrowForwardIos } from '@mui/icons-material';
 import { isNilOrEmpty } from '../../helpers';
 import { PokemonAvatar } from './PokemonAvatar';
 import { useSearch } from '@tanstack/react-router';
-import { PokemonSearchParams } from '../../routes';
 import { useGetPokemonSpeciesByName } from '../../hooks/pokemonSpecies';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { PokemonSearchParams } from '../../types/router';
 
 export const EvolutionChain = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;

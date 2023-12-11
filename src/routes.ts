@@ -2,10 +2,8 @@ import { RootRoute, Route, Router } from '@tanstack/react-router';
 import { LandingPage } from './pages/LandingPage';
 import { Layout } from './components/Layout';
 import { Pokemon } from './pages/Pokemon';
-
-export interface PokemonSearchParams {
-  name: string;
-}
+import { Types } from './pages/Types';
+import { PokemonSearchParams, TypeSearchParams } from './types/router';
 
 const rootRoute = new RootRoute({ component: Layout });
 
@@ -31,7 +29,27 @@ const pokemonPage = new Route({
   },
 });
 
-const routeTree = rootRoute.addChildren([landingPage, pokemonsPage.addChildren([pokemonPage])]);
+const typesPage = new Route({
+  getParentRoute: () => rootRoute,
+  path: 'type',
+});
+
+const typePage = new Route({
+  getParentRoute: () => typesPage,
+  path: '/',
+  component: Types,
+  validateSearch: (search: Record<string, unknown>): TypeSearchParams => {
+    return {
+      name: search.name ?? '',
+    } as TypeSearchParams;
+  },
+});
+
+const routeTree = rootRoute.addChildren([
+  landingPage,
+  pokemonsPage.addChildren([pokemonPage]),
+  typesPage.addChildren([typePage]),
+]);
 
 export const router = new Router({ routeTree });
 

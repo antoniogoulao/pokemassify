@@ -1,7 +1,7 @@
 import { Pokemon } from './Pokemon';
 
 import * as reactRouter from '@tanstack/react-router';
-import { evolutionDetail, evolutionDetailSingle, pokemonDetail } from '../__mocks__/pokemons.mocks';
+import { evolutionDetail, evolutionDetailSingle, pokemonDetail, speciesDetail } from '../__mocks__/pokemons.mocks';
 
 describe('Pokemon page', () => {
   beforeEach(() => {
@@ -11,6 +11,7 @@ describe('Pokemon page', () => {
       .callsFake(() => cy.stub());
     cy.intercept('https://pokeapi.co/api/v2/pokemon/bulbasaur', pokemonDetail);
     cy.intercept('https://pokeapi.co/api/v2/evolution-chain/1', evolutionDetail);
+    cy.intercept('https://pokeapi.co/api/v2/pokemon-species/', speciesDetail);
   });
 
   it('should render', () => {

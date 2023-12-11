@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   InputLabel,
   ListItem,
@@ -12,13 +13,22 @@ import {
 import React, { useContext, useState } from 'react';
 import { SearchContext } from '../../store/SearchContext';
 import { FormattedMessage } from 'react-intl';
+import { ArrowForwardIos } from '@mui/icons-material';
+import { useNavigate } from '@tanstack/react-router';
 
 export const TypeFilter = () => {
   const [type, setType] = useState('');
   const { isLoadingTypes, types } = useContext(SearchContext);
+  const navigate = useNavigate();
 
   const handleChange = (event: SelectChangeEvent) => {
     setType(event.target.value);
+  };
+
+  const handleClickDetails = (name: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    navigate({ to: '/type', search: { name } });
   };
 
   return (
@@ -36,7 +46,7 @@ export const TypeFilter = () => {
         sx={{ backgroundColor: 'white' }}
       >
         <MenuItem value="">
-          <ListItem>
+          <ListItem component="div">
             <ListItemIcon>
               <img width={32} src={`/images/types/none_icon.png`} alt={'none'} />
             </ListItemIcon>
@@ -49,7 +59,21 @@ export const TypeFilter = () => {
         </MenuItem>
         {types.map((type) => (
           <MenuItem key={type.name} value={type.name}>
-            <ListItem component="div">
+            <ListItem
+              component="div"
+              secondaryAction={
+                <Button
+                  variant="contained"
+                  onClick={handleClickDetails(type.name)}
+                  endIcon={<ArrowForwardIos />}
+                  sx={{ textTransform: 'none' }}
+                >
+                  <Typography>
+                    <FormattedMessage id="label.details" defaultMessage="Details" />
+                  </Typography>
+                </Button>
+              }
+            >
               <ListItemIcon>
                 <img width={32} src={`/images/types/${type.name}_icon.png`} alt={type.name} />
               </ListItemIcon>

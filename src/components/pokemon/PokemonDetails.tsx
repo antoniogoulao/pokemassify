@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { CancelRounded, CheckBox, ExpandMore } from '@mui/icons-material';
 import { FormattedMessage } from 'react-intl';
 import { useSearch } from '@tanstack/react-router';
-import { PokemonSearchParams } from '../../routes';
 import { useGetPokemonSpeciesByName } from '../../hooks/pokemonSpecies';
 import { isNilOrEmpty } from '../../helpers';
+import { PokemonSearchParams } from '../../types/router';
 
 export const PokemonDetails = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;

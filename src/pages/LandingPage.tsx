@@ -22,6 +22,17 @@ export const LandingPage = () => {
     }
   }, [fetchNextPage, inView]);
 
+  const getLoadingButtonLabel = () => {
+    if (isFetchingNextPage) {
+      return <FormattedMessage id="load.more" defaultMessage="Loading more..." />;
+    }
+    return hasNextPage ? (
+      <FormattedMessage id="action.loadMore" defaultMessage="Load Newer" />
+    ) : (
+      <FormattedMessage id="info.nothingToLoad" defaultMessage="Nothing more to load" />
+    );
+  };
+
   if (isError) {
     return <AppErrorBoundary />;
   }
@@ -56,13 +67,7 @@ export const LandingPage = () => {
           disabled={!hasNextPage || isFetchingNextPage}
           color="info"
         >
-          {isFetchingNextPage ? (
-            <FormattedMessage id="load.more" defaultMessage="Loading more..." />
-          ) : hasNextPage ? (
-            <FormattedMessage id="action.loadMore" defaultMessage="Load Newer" />
-          ) : (
-            <FormattedMessage id="info.nothingToLoad" defaultMessage="Nothing more to load" />
-          )}
+          {getLoadingButtonLabel()}
         </Button>
       </Box>
     </ErrorBoundary>

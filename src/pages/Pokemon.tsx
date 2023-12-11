@@ -1,6 +1,5 @@
 import { Avatar, Paper, Stack, Tooltip, Typography } from '@mui/material';
-import { useSearch } from '@tanstack/react-router';
-import { PokemonSearchParams } from '../routes';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useGetPokemonByName } from '../hooks/pokemon';
 import { isNilOrEmpty } from '../helpers';
 import React from 'react';
@@ -13,11 +12,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { PokemonDetails } from '../components/pokemon/PokemonDetails';
 import { Loading } from '../components/pokemon/Loading';
 import { PokemonNotFound } from '../components/pokemon/PokemonNotFound';
+import { PokemonSearchParams } from '../types/router';
 
 export const Pokemon = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
   const { data, isLoading } = useGetPokemonByName(search.name);
   const intl = useIntl();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <Loading message={intl.formatMessage({ id: 'load.pokemon', defaultMessage: 'Loading Pokémon' })} />;
@@ -70,17 +71,18 @@ export const Pokemon = () => {
           />
         </>
         <Stack direction="row" justifyContent="center" spacing={1}>
-          {data.types.map((type) => (
-            <Tooltip key={type.type.name} title={type.type.name}>
+          {data.types.map(({ type }) => (
+            <Tooltip key={type.name} title={type.name}>
               <Avatar
                 component={Paper}
                 elevation={3}
-                src={`/images/types/${type.type.name}_icon.png`}
-                alt={type.type.name}
+                src={`/images/types/${type.name}_icon.png`}
+                alt={type.name}
                 sx={{
                   width: 30,
                   height: 30,
                 }}
+                onClick={() => navigate({ to: '/type', search: { name: type.name } })}
               />
             </Tooltip>
           ))}
