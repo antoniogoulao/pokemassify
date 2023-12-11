@@ -5,8 +5,8 @@
   "error.appDescription": "En raison de problèmes techniques, il n'a pas été possible de charger toutes les informations nécessaires.",
   "error.emptyData": "L'application n'a pas pu se charger",
   "error.exception": "Quelque chose s'est mal passé.",
-  "error.generic": "Erreur",
   "info.noEvolution": "Ce Pokémon n'a aucune évolution.",
+  "info.notFound": "Pokémon Introuvable",
   "info.nothingToLoad": "Rien d'autre à charger",
   "label.abilities": "Capacités",
   "label.about": "À propos",
@@ -21,5 +21,7 @@
   "label.search": "Rechercher",
   "label.type": "Type",
   "label.weight": "Poids",
-  "load.more": "Chargement en cours..."
+  "load.more": "Chargement en cours...",
+  "load.pokemon": "Chargement Pokémon",
+  "quote.magikarp": "Pokédex : Un Magikarpe qui vit de nombreuses années peut utiliser Splash pour sauter par-dessus une montagne. Cependant, la compétence est inutile."
 }

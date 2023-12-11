@@ -1,4 +1,4 @@
-import { Avatar, Paper, Skeleton, Stack, Tooltip, Typography } from '@mui/material';
+import { Avatar, Paper, Stack, Tooltip, Typography } from '@mui/material';
 import { useSearch } from '@tanstack/react-router';
 import { PokemonSearchParams } from '../routes';
 import { useGetPokemonByName } from '../hooks/pokemon';
@@ -9,19 +9,22 @@ import { EvolutionChain } from '../components/pokemon/EvolutionChain';
 import { PokemonDescription } from '../components/pokemon/PokemonDescription';
 import { BaseStats } from '../components/pokemon/BaseStats';
 import { Abilities } from '../components/pokemon/Abilities';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { PokemonDetails } from '../components/pokemon/PokemonDetails';
+import { Loading } from '../components/pokemon/Loading';
+import { PokemonNotFound } from '../components/pokemon/PokemonNotFound';
 
 export const Pokemon = () => {
   const search = useSearch({ from: '/pokemon/' }) as PokemonSearchParams;
   const { data, isLoading } = useGetPokemonByName(search.name);
+  const intl = useIntl();
 
   if (isLoading) {
-    return <Skeleton width={100} height={500} />;
+    return <Loading message={intl.formatMessage({ id: 'load.pokemon', defaultMessage: 'Loading Pokémon' })} />;
   }
 
   if (isNilOrEmpty(data)) {
-    return null;
+    return <PokemonNotFound />;
   }
 
   return (

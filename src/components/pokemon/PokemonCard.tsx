@@ -10,7 +10,24 @@ export const PokemonCard = ({ name }: { name: string }) => {
   const navigate = useNavigate();
 
   if (isFetching) {
-    <Skeleton width={100} height={200} />;
+    return (
+      <Card
+        raised
+        sx={{
+          margin: 1,
+          maxWidth: 220,
+        }}
+      >
+        <Stack gap={1} px={1} alignItems="center">
+          <Stack direction="row" mt={1} justifyContent="space-between" width="100%">
+            <Skeleton variant="rectangular" width={20} height={20} />
+            <Skeleton variant="rectangular" width={40} height={20} />
+          </Stack>
+          <Skeleton variant="rounded" width={150} height={140} />
+          <Skeleton variant="text" width={100} sx={{ fontSize: '1rem', mb: 1 }} />
+        </Stack>
+      </Card>
+    );
   }
 
   if (isNilOrEmpty(data)) {
@@ -30,7 +47,6 @@ export const PokemonCard = ({ name }: { name: string }) => {
     >
       <CardActionArea
         onClick={() => {
-          console.log('called');
           navigate({ to: '/pokemon', search: { name } });
         }}
       >

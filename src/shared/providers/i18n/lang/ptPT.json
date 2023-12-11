@@ -5,8 +5,8 @@
   "error.appDescription": "Devido a problemas técnicos, não foi possível carregar toda a informação necessária.",
   "error.emptyData": "A aplicação não conseguiu carregar",
   "error.exception": "Algo correu mal.",
-  "error.generic": "Erro",
   "info.noEvolution": "Este Pokémon não tem evoluções.",
+  "info.notFound": "Pokémon Não Encontrado",
   "info.nothingToLoad": "Nada mais para carregar",
   "label.abilities": "Aptidões",
   "label.about": "Sobre",
@@ -21,5 +21,7 @@
   "label.search": "Pesquisa",
   "label.type": "Tipo",
   "label.weight": "Peso",
-  "load.more": "A carregar..."
+  "load.more": "A carregar...",
+  "load.pokemon": "Carregando Pokémon",
+  "quote.magikarp": "Pokédex: Um Magikarp que viva durante mutos anos consegue usar o Splash para saltar por cima de uma montanha. Contudo, a habilidade é inútil."
 }

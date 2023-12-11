@@ -8,7 +8,7 @@ export const PokemonAvatar = ({ name, selected = false }: { name: string; select
   const navigate = useNavigate();
 
   if (isLoading) {
-    return <Skeleton />;
+    return <Skeleton variant="rounded" width={70} height={70} />;
   }
 
   if (isNilOrEmpty(data)) {

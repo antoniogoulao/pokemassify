@@ -1,17 +1,20 @@
-import { Box, Button, Skeleton, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useGetPokemons } from '../hooks/pokemon';
-import { isNilOrEmpty } from '../helpers';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import { PokemonCard } from '../components/pokemon/PokemonCard';
 import { NavBar } from '../components/NavBar';
 import { AppErrorBoundary } from '../components/AppErrorBoundary';
 import { ErrorBoundary } from '../shared/components/src/ErrorBoundary/ErrorBoundary';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Loading } from '../components/pokemon/Loading';
+import { LoadingFailed } from '../components/LoadingFailed';
+import { isNilOrEmpty } from '../helpers';
 
 export const LandingPage = () => {
   const { ref, inView } = useInView();
   const { data, status, isError, isFetchingNextPage, fetchNextPage, hasNextPage } = useGetPokemons();
+  const intl = useIntl();
 
   useEffect(() => {
     if (inView) {
@@ -20,24 +23,21 @@ export const LandingPage = () => {
   }, [fetchNextPage, inView]);
 
   if (isError) {
-    return (
-      <Typography>
-        <FormattedMessage id="error.generic" defaultMessage="Error" />
-      </Typography>
-    );
+    return <AppErrorBoundary />;
   }
 
   if (status === 'pending') {
-    return <Skeleton variant="rectangular" height={16} width={290} />;
+    return <Loading />;
   }
 
   if (isNilOrEmpty(data)) {
     return (
-      <Typography>
-        <FormattedMessage id="error.emptyData" defaultMessage="We could not load any data" />
-      </Typography>
+      <LoadingFailed
+        message={intl.formatMessage({ id: 'error.emptyData', defaultMessage: 'We could not load any data' })}
+      />
     );
   }
+
   return (
     <ErrorBoundary fallback={<AppErrorBoundary />}>
       <NavBar />
@@ -49,7 +49,13 @@ export const LandingPage = () => {
             ))}
           </Box>
         ))}
-        <Button ref={ref} onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
+        <Button
+          variant={'contained'}
+          ref={ref}
+          onClick={() => fetchNextPage()}
+          disabled={!hasNextPage || isFetchingNextPage}
+          color="info"
+        >
           {isFetchingNextPage ? (
             <FormattedMessage id="load.more" defaultMessage="Loading more..." />
           ) : hasNextPage ? (

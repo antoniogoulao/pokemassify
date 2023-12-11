@@ -6,6 +6,7 @@ interface ThemeProviderProps {
 }
 
 const theme = createTheme({
+  // https://mui.com/material-ui/customization/default-theme/?expand-path=$.palette
   palette: {},
   spacing: 8,
 });

@@ -19,7 +19,7 @@ export const PokemonDescription = () => {
   }, [pokemonSpecies]);
 
   if (isFetchingPokemonSpecies) {
-    return <Skeleton width={500} height={100} />;
+    return <Skeleton variant="text" width="100%" height={80} />;
   }
 
   if (isNilOrEmpty(pokemonSpecies)) {

@@ -20,7 +20,7 @@ export const EvolutionChain = () => {
   );
 
   if (isLoading) {
-    return <Skeleton width={1000} height={200} />;
+    return <Skeleton width="100%" height={180} />;
   }
 
   if (isNilOrEmpty(data)) {

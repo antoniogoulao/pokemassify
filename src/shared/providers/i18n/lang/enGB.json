@@ -5,8 +5,8 @@
   "error.appDescription": "We could not load all the data we needed due to a technical issue.",
   "error.emptyData": "We could not load any data",
   "error.exception": "Something went wrong.",
-  "error.generic": "Error",
   "info.noEvolution": "This Pokémon does not evolve.",
+  "info.notFound": "Pokémon Not Found",
   "info.nothingToLoad": "Nothing more to load",
   "label.abilities": "Abilities",
   "label.about": "About",
@@ -21,5 +21,7 @@
   "label.search": "Search",
   "label.type": "Type",
   "label.weight": "Weight",
-  "load.more": "Loading more..."
+  "load.more": "Loading more...",
+  "load.pokemon": "Loading Pokémon",
+  "quote.magikarp": "Pokédex: A Magikarp living for many years can leap a mountain using Splash. The move remains useless, though."
 }
